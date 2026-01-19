@@ -1,0 +1,7 @@
+# robots.txt cho Nhà hàng Hoàng Cung
+User-agent: *
+Allow: /
+Disallow: /admin/
+
+# Sitemap
+Sitemap: https://hoangcung-dalat.vn/sitemap.xml
