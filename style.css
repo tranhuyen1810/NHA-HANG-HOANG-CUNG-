@@ -116,7 +116,7 @@ body {
 }
 
 .logo-text h1 {
-    font-family: 'Playfair Display', serif;
+    font-family: 'Poppins', sans-serif;
     color: rgb(101, 9, 9);
     font-size: 1.4rem;
     font-weight: 700;
@@ -222,7 +222,7 @@ body {
 }
 
 .hero-title {
-    font-family: 'Playfair Display', serif;
+    font-family: 'Poppins', sans-serif;
     font-size: 5rem;
     font-weight: 700;
     margin-bottom: 20px;
@@ -325,7 +325,7 @@ section {
 }
 
 .section-title {
-    font-family: 'Playfair Display', serif;
+    font-family: 'Poppins', sans-serif;
     font-size: 3rem;
     font-weight: 700;
     color: var(--dark-color);
@@ -383,7 +383,7 @@ section {
 }
 
 .about-text h3 {
-    font-family: 'Playfair Display', serif;
+    font-family: 'Poppins', sans-serif;
     font-size: 2rem;
     margin-bottom: 20px;
     color: var(--dark-color);
@@ -508,7 +508,7 @@ section {
 }
 
 .menu-content h3 {
-    font-family: 'Playfair Display', serif;
+    font-family: 'Poppins', sans-serif;
     font-size: 1.5rem;
     margin-bottom: 10px;
     color: var(--dark-color);
@@ -610,7 +610,7 @@ section {
 }
 
 .footer-section h3 {
-    font-family: 'Playfair Display', serif;
+    font-family: 'Poppins', sans-serif;
     font-size: 1.8rem;
     margin-bottom: 20px;
     color: var(--primary-color);
