@@ -363,8 +363,8 @@ section {
     position: absolute;
     bottom: 0;
     right: 0;
-    width: 50%;
-    height: 50%;
+    width: 35%;
+    height: 35%;
     border-radius: 10px;
     overflow: hidden;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
