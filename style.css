@@ -817,13 +817,21 @@ section {
     }
 }
 
+@media (max-width: 768px) {
+    .hero {
+        height: 50vh;
+        min-height: 400px;
+    }
+}
+
 @media (max-width: 480px) {
     .hero {
-        height: 25vh;
+        height: 45vh;
+        min-height: 350px;
     }
     
     .hero-title {
-        font-size: 2rem;
+        font-size: 1.8rem;
     }
     
     .section-title {
