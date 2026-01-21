@@ -96,7 +96,22 @@
     }
     </script>
     
-    <link rel="stylesheet" href="style.css?v=2">
+    <link rel="stylesheet" href="style.css?v=3">
+    <style>
+        /* Force mobile hero height */
+        @media (max-width: 768px) {
+            .hero {
+                height: 50vh !important;
+                min-height: 400px !important;
+            }
+        }
+        @media (max-width: 480px) {
+            .hero {
+                height: 40vh !important;
+                min-height: 300px !important;
+            }
+        }
+    </style>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
