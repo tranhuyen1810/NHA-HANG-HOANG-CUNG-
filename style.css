@@ -819,15 +819,15 @@ section {
 
 @media (max-width: 768px) {
     .hero {
-        height: 50vh;
-        min-height: 400px;
+        height: 50vh !important;
+        min-height: 400px !important;
     }
 }
 
 @media (max-width: 480px) {
     .hero {
-        height: 45vh;
-        min-height: 350px;
+        height: 40vh !important;
+        min-height: 300px !important;
     }
     
     .hero-title {
