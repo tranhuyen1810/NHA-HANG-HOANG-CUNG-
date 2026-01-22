@@ -206,7 +206,7 @@ body {
     background-position: center center;
     background-repeat: no-repeat;
     display: flex;
-    align-items: center;
+    align-items: flex-end;
     justify-content: center;
     text-align: center;
     color: var(--white-color);
@@ -216,6 +216,9 @@ body {
 .hero-content {
     z-index: 2;
     animation: fadeInUp 1s ease;
+    padding-bottom: 40px;
+    width: 100%;
+    max-width: 800px;
 }
 
 .hero-subtitle {
@@ -1280,6 +1283,11 @@ section {
     padding: 40px 0;
     background-position: center center;
     background-size: cover;
+    align-items: flex-end;
+  }
+  
+  .hero-content {
+    padding-bottom: 60px;
   }
   
   .hero h1 {
@@ -1290,6 +1298,17 @@ section {
   .hero p {
     font-size: 0.95rem;
     margin-bottom: 1.5rem;
+  }
+  
+  .hero-buttons {
+    flex-direction: column;
+    gap: 12px;
+    padding: 0 16px;
+  }
+  
+  .hero-buttons .btn {
+    width: 100%;
+    max-width: 300px;
   }
   
   /* ========== SECTIONS ========== */
@@ -1773,6 +1792,11 @@ section {
   .hero {
     height: 700px;
     padding: 50px 0;
+    align-items: flex-end;
+  }
+  
+  .hero-content {
+    padding-bottom: 70px;
   }
   
   .hero h1 {
@@ -1821,6 +1845,11 @@ section {
     padding: 30px 0;
     background-position: center center;
     background-size: cover;
+    align-items: flex-end;
+  }
+  
+  .hero-content {
+    padding-bottom: 50px;
   }
   
   .main-image {
