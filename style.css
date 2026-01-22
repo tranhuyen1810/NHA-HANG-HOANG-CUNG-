@@ -475,7 +475,7 @@ section {
 
 .gallery-item {
     position: relative;
-    height: 300px;
+    height: 400px;
     border-radius: 10px;
     overflow: hidden;
     cursor: pointer;
