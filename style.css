@@ -197,15 +197,20 @@ body {
 
 /* ===== Hero Section ===== */
 .hero {
-    height: 200vh;
-    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), 
-                url('image/image copy.png') center/cover no-repeat;
+    position: relative;
+    width: 100%;
+    height: 680px;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), 
+                      url('image/image copy.png');
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
     display: flex;
     align-items: center;
     justify-content: center;
     text-align: center;
-    position: relative;
     color: var(--white-color);
+    overflow: hidden;
 }
 
 .hero-content {
@@ -819,15 +824,17 @@ section {
 
 @media (max-width: 768px) {
     .hero {
-        height: 25vh !important;
-        min-height: 200px !important;
+        height: 100vh !important;
+        min-height: 500px !important;
+        background-position: center center;
+        background-size: cover;
     }
 }
 
 @media (max-width: 480px) {
     .hero {
-        height: 25vh !important;
-        min-height: 200px !important;
+        height: 100vh !important;
+        min-height: 450px !important;
     }
     
     .hero-title {
@@ -1268,8 +1275,11 @@ section {
   /* ========== HERO SECTION ========== */
   
   .hero {
+    height: 100vh !important;
+    min-height: 500px !important;
     padding: 40px 0;
-    min-height: auto;
+    background-position: center center;
+    background-size: cover;
   }
   
   .hero h1 {
@@ -1761,6 +1771,7 @@ section {
   
   /* Hero */
   .hero {
+    height: 680px;
     padding: 50px 0;
   }
   
@@ -1805,8 +1816,11 @@ section {
   }
   
   .hero {
+    height: 100vh;
+    min-height: 400px;
     padding: 30px 0;
-    min-height: auto;
+    background-position: center center;
+    background-size: cover;
   }
   
   .main-image {
