@@ -877,7 +877,6 @@ section {
     overflow-x: hidden;
     width: 100%;
     position: relative;
-    padding-top: 0 !important;
   }
   
   .container {
@@ -989,165 +988,6 @@ section {
   
   /* ========== HEADER & NAVIGATION ========== */
   
-  /* Header Fixed */
-  .header {
-    position: fixed !important;
-    top: 0 !important;
-    left: 0 !important;
-    width: 100% !important;
-    background: rgba(255, 255, 255, 0.98) !important;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1) !important;
-    z-index: 1000 !important;
-    padding: 8px 0 !important;
-  }
-  
-  .navbar {
-    display: flex !important;
-    justify-content: space-between !important;
-    align-items: center !important;
-    padding: 4px 16px !important;
-  }
-  
-  /* Logo Section */
-  .logo {
-    display: flex !important;
-    align-items: center !important;
-    gap: 10px !important;
-    flex: 1 !important;
-  }
-  
-  .logo-image {
-    width: 35px !important;
-    height: 35px !important;
-    object-fit: contain !important;
-  }
-  
-  .logo-text {
-    display: flex !important;
-    flex-direction: column !important;
-    gap: 2px !important;
-  }
-  
-  .logo-text h1 {
-    font-size: 0.75rem !important;
-    font-weight: 700 !important;
-    line-height: 1.2 !important;
-    margin: 0 !important;
-    color: #c8a97e !important;
-    letter-spacing: 0.5px !important;
-    white-space: nowrap !important;
-  }
-  
-  .logo-text p {
-    font-size: 0.55rem !important;
-    line-height: 1.2 !important;
-    margin: 0 !important;
-    color: #666 !important;
-    opacity: 0.85 !important;
-    white-space: nowrap !important;
-  }
-  
-  /* Nav Menu for Mobile */
-  .nav-menu {
-    position: fixed !important;
-    top: 0 !important;
-    right: -100% !important;
-    width: 75% !important;
-    max-width: 320px !important;
-    height: 100vh !important;
-    background: white !important;
-    flex-direction: column !important;
-    padding: 70px 0 20px !important;
-    box-shadow: -2px 0 10px rgba(0, 0, 0, 0.2) !important;
-    transition: right 0.3s ease !important;
-    overflow-y: auto !important;
-    z-index: 999 !important;
-    display: flex !important;
-    align-items: stretch !important;
-    gap: 0 !important;
-  }
-  
-  .nav-menu.active {
-    right: 0 !important;
-  }
-  
-  .nav-menu li {
-    width: 100% !important;
-    border-bottom: 1px solid #f0f0f0 !important;
-    list-style: none !important;
-  }
-  
-  .nav-menu a {
-    display: block !important;
-    padding: 18px 24px !important;
-    color: #333 !important;
-    font-size: 1rem !important;
-    font-weight: 500 !important;
-    text-decoration: none !important;
-    transition: all 0.3s ease !important;
-  }
-  
-  .nav-menu a:hover,
-  .nav-menu a.active {
-    background: rgba(200, 169, 126, 0.1) !important;
-    color: #c8a97e !important;
-  }
-  
-  .nav-menu a::after {
-    display: none !important;
-  }
-  
-  .btn-reserve {
-    background: #c8a97e !important;
-    color: white !important;
-    border-radius: 8px !important;
-    margin: 10px 16px !important;
-    text-align: center !important;
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    gap: 8px !important;
-  }
-  
-  .btn-reserve:hover {
-    background: #b8997e !important;
-  }
-  
-  /* Mobile Menu Toggle */
-  .mobile-menu-toggle {
-    display: flex !important;
-    flex-direction: column !important;
-    justify-content: space-around !important;
-    width: 28px !important;
-    height: 22px !important;
-    background: transparent !important;
-    border: none !important;
-    cursor: pointer !important;
-    padding: 0 !important;
-    z-index: 1001 !important;
-  }
-  
-  .mobile-menu-toggle span {
-    display: block !important;
-    width: 100% !important;
-    height: 3px !important;
-    background: #c8a97e !important;
-    border-radius: 3px !important;
-    transition: all 0.3s ease !important;
-  }
-  
-  .mobile-menu-toggle.active span:nth-child(1) {
-    transform: rotate(45deg) translateY(8px) !important;
-  }
-  
-  .mobile-menu-toggle.active span:nth-child(2) {
-    opacity: 0 !important;
-  }
-  
-  .mobile-menu-toggle.active span:nth-child(3) {
-    transform: rotate(-45deg) translateY(-8px) !important;
-  }
-  
   /* Top Header */
   .top-header {
     padding: 0;
@@ -1162,10 +1002,21 @@ section {
     flex: 1;
   }
   
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  
   .logo-icon {
     width: 40px;
     height: 40px;
     font-size: 1.8rem;
+  }
+  
+  .logo-text {
+    display: flex;
+    flex-direction: column;
   }
   
   .logo-name {
@@ -1417,139 +1268,15 @@ section {
   /* ========== HERO SECTION ========== */
   
   .hero {
-    padding: 0 !important;
-    min-height: 100vh !important;
-    height: 100vh !important;
-    margin-top: 0 !important;
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    position: relative !important;
-    background-size: cover !important;
-    background-position: center !important;
-    background-repeat: no-repeat !important;
+    padding: 40px 0;
+    min-height: auto;
   }
   
-  .hero::before {
-    content: '' !important;
-    position: absolute !important;
-    top: 0 !important;
-    left: 0 !important;
-    right: 0 !important;
-    bottom: 0 !important;
-    background: rgba(0, 0, 0, 0.4) !important;
-    z-index: 1 !important;
-  }
-  
-  .hero-content {
-    position: relative !important;
-    z-index: 2 !important;
-    text-align: center !important;
-    padding: 20px !important;
-    width: 100% !important;
-  }
-  
-  .hero-title {
-    font-size: 2.5rem !important;
-    font-weight: 700 !important;
-    color: white !important;
-    margin-bottom: 0.5rem !important;
-    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5) !important;
-    letter-spacing: 2px !important;
-  }
-  
-  .hero-description {
-    font-size: 0.95rem !important;
-    color: white !important;
-    margin-bottom: 2rem !important;
-    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.5) !important;
-    opacity: 0.95 !important;
-  }
-  
-  .hero-buttons {
-    display: flex !important;
-    flex-direction: column !important;
-    gap: 12px !important;
-    align-items: center !important;
-    width: 100% !important;
-    max-width: 320px !important;
-    margin: 0 auto !important;
-  }
-  
-  .hero-buttons .btn {
-    width: 100% !important;
-    padding: 14px 24px !important;
-    font-size: 0.95rem !important;
-    border-radius: 8px !important;
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    gap: 8px !important;
-    font-weight: 600 !important;
-    text-decoration: none !important;
-    transition: all 0.3s ease !important;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2) !important;
-  }
-  
-  .btn-primary {
-    background: #c8a97e !important;
-    color: white !important;
-    border: none !important;
-  }
-  
-  .btn-primary:hover,
-  .btn-primary:active {
-    background: #b8997e !important;
-    transform: translateY(-2px) !important;
-    box-shadow: 0 6px 16px rgba(200, 169, 126, 0.4) !important;
-  }
-  
-  .btn-secondary {
-    background: transparent !important;
-    color: white !important;
-    border: 2px solid white !important;
-  }
-  
-  .btn-secondary:hover,
-  .btn-secondary:active {
-    background: rgba(255, 255, 255, 0.1) !important;
-    transform: translateY(-2px) !important;
-  }
-  
-  /* Scroll Indicator */
-  .scroll-indicator {
-    position: absolute !important;
-    bottom: 30px !important;
-    left: 50% !important;
-    transform: translateX(-50%) !important;
-    z-index: 3 !important;
-  }
-  
-  .scroll-indicator a {
-    color: white !important;
-    font-size: 2rem !important;
-    opacity: 0.8 !important;
-    animation: bounce 2s infinite !important;
-    display: block !important;
-  }
-  
-  @keyframes bounce {
-    0%, 20%, 50%, 80%, 100% {
-      transform: translateY(0);
-    }
-    40% {
-      transform: translateY(-10px);
-    }
-    60% {
-      transform: translateY(-5px);
-    }
-  }
-
   .hero h1 {
     font-size: 1.5rem;
     margin-bottom: 1rem;
   }
-
+  
   .hero p {
     font-size: 0.95rem;
     margin-bottom: 1.5rem;
@@ -1572,23 +1299,6 @@ section {
   
   .mb-4 {
     margin-bottom: 1.5rem;
-  }
-  
-  /* Section Header */
-  .section-header {
-    text-align: center !important;
-    margin-bottom: 2rem !important;
-    padding-top: 1rem !important;
-  }
-  
-  .section-subtitle {
-    display: block !important;
-    font-size: 1.3rem !important;
-    font-weight: 600 !important;
-    color: #c8a97e !important;
-    text-transform: uppercase !important;
-    letter-spacing: 2px !important;
-    margin-bottom: 0.5rem !important;
   }
   
   /* ========== GRID LAYOUTS ========== */

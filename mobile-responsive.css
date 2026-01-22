@@ -1,0 +1,250 @@
+/* ========================================
+   MOBILE RESPONSIVE STYLES
+   Chỉ áp dụng cho mobile, không ảnh hưởng desktop
+   ======================================== */
+
+/* ===========================================
+   TABLET (≤992px)
+   =========================================== */
+@media (max-width: 992px) {
+  .container {
+    padding: 0 2rem;
+  }
+  
+  /* Grid 2 cột cho tablet */
+  .menu-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+  }
+  
+  /* Giảm kích thước tiêu đề */
+  h1 {
+    font-size: 2rem;
+  }
+  
+  h2 {
+    font-size: 1.75rem;
+  }
+}
+
+/* ===========================================
+   MOBILE (≤768px)
+   =========================================== */
+@media (max-width: 768px) {
+  /* Ngăn overflow ngang */
+  body {
+    overflow-x: hidden;
+    width: 100%;
+  }
+  
+  html {
+    overflow-x: hidden;
+    width: 100%;
+  }
+  
+  /* Container */
+  .container {
+    padding: 0 1.5rem;
+    max-width: 100%;
+  }
+  
+  /* Typography */
+  h1 {
+    font-size: 1.75rem;
+  }
+  
+  h2 {
+    font-size: 1.5rem;
+  }
+  
+  h3 {
+    font-size: 1.25rem;
+  }
+  
+  p {
+    font-size: 0.95rem;
+  }
+  
+  /* Navigation */
+  .mobile-menu-toggle {
+    display: flex;
+  }
+  
+  .nav-menu {
+    position: fixed;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100vh;
+    background: white;
+    flex-direction: column;
+    transition: left 0.3s ease;
+    padding-top: 60px;
+    z-index: 999;
+  }
+  
+  .nav-menu.active {
+    left: 0;
+  }
+  
+  .nav-menu a {
+    padding: 1rem 2rem;
+    border-bottom: 1px solid #eee;
+  }
+  
+  /* Grid Layout - Chuyển 2 cột thành 1 cột */
+  .alternating-row,
+  .menu-grid,
+  .gallery-grid {
+    grid-template-columns: 1fr !important;
+    gap: 1.5rem;
+  }
+  
+  /* Flexible Images */
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+  
+  /* Hero Section */
+  .hero {
+    height: auto;
+    min-height: 300px;
+    padding: 3rem 0;
+  }
+  
+  .hero-title {
+    font-size: 1.75rem;
+  }
+  
+  .hero-content {
+    padding: 2rem 1.5rem;
+  }
+  
+  /* Buttons */
+  .btn {
+    width: 100%;
+    padding: 0.875rem 1.5rem;
+    font-size: 0.95rem;
+  }
+  
+  .hero-buttons {
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  /* Sections */
+  section {
+    padding: 3rem 0;
+  }
+  
+  /* Cards */
+  .card {
+    margin-bottom: 1.5rem;
+  }
+  
+  /* Footer */
+  .footer-content {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    text-align: center;
+  }
+}
+
+/* ===========================================
+   EXTRA SMALL (≤480px)
+   =========================================== */
+@media (max-width: 480px) {
+  /* Container */
+  .container {
+    padding: 0 1rem;
+  }
+  
+  /* Typography */
+  h1 {
+    font-size: 1.5rem;
+  }
+  
+  h2 {
+    font-size: 1.3rem;
+  }
+  
+  h3 {
+    font-size: 1.15rem;
+  }
+  
+  p {
+    font-size: 0.9rem;
+  }
+  
+  /* Hero */
+  .hero {
+    min-height: 250px;
+    padding: 2rem 0;
+  }
+  
+  .hero-title {
+    font-size: 1.5rem;
+  }
+  
+  /* Buttons */
+  .btn {
+    padding: 0.75rem 1.25rem;
+    font-size: 0.9rem;
+  }
+  
+  /* Sections */
+  section {
+    padding: 2rem 0;
+  }
+  
+  /* Warning Banner */
+  .warning-banner {
+    padding: 1rem 0;
+  }
+  
+  .warning-banner h3 {
+    font-size: 1rem;
+  }
+  
+  .warning-banner p {
+    font-size: 0.85rem;
+  }
+}
+
+/* ===========================================
+   LANDSCAPE MODE (Mobile ngang)
+   =========================================== */
+@media (max-width: 768px) and (orientation: landscape) {
+  .hero {
+    min-height: 200px;
+    padding: 2rem 0;
+  }
+  
+  .nav-menu {
+    overflow-y: auto;
+  }
+}
+
+/* ===========================================
+   PREVENT HORIZONTAL SCROLL
+   =========================================== */
+@media (max-width: 768px) {
+  /* Ngăn tất cả elements gây overflow */
+  * {
+    max-width: 100%;
+  }
+  
+  *:not(img):not(svg):not(video) {
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+  }
+  
+  /* Đảm bảo các thành phần khác không overflow */
+  .row,
+  .container,
+  section,
+  div {
+    box-sizing: border-box;
+  }
+}
