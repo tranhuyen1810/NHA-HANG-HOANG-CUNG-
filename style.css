@@ -249,9 +249,10 @@ body {
 .hero-content {
     z-index: 2;
     animation: fadeInUp 1s ease;
-    padding-bottom: 40px;
+    padding-bottom: 20px;
     width: 100%;
     max-width: 800px;
+    position: relative;
 }
 
 .hero-subtitle {
@@ -1320,7 +1321,7 @@ section {
   }
   
   .hero-content {
-    padding-bottom: 60px;
+    padding-bottom: 15px;
   }
   
   .hero h1 {
@@ -1829,7 +1830,7 @@ section {
   }
   
   .hero-content {
-    padding-bottom: 70px;
+    padding-bottom: 40px;
   }
   
   .hero h1 {
@@ -1882,7 +1883,7 @@ section {
   }
   
   .hero-content {
-    padding-bottom: 50px;
+    padding-bottom: 25px;
   }
   
   .main-image {
