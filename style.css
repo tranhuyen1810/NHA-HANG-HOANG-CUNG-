@@ -220,7 +220,7 @@ body {
     background-size: cover;
     background-position: center center;
     background-repeat: no-repeat;
-    animation: kenBurns 20s ease-in-out infinite alternate;
+    animation: kenBurns 5s ease-in-out infinite alternate;
     z-index: 0;
 }
 
