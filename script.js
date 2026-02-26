@@ -232,7 +232,7 @@ console.log('%cKiến trúc Huế độc đáo tại Osaka Village Đà Lạt', 
 console.log('%cHotline: 0366 650 897', 'color: #333; font-size: 12px;');
 
 // ===== Carousel Functions =====
-let currentSlideIndex = 1;
+let currentSlideIndex = 2;
 
 function changeSlide(n) {
     showSlide(currentSlideIndex += n);
@@ -263,3 +263,8 @@ function showSlide(n) {
         dots[currentSlideIndex - 1].classList.add('active');
     }
 }
+
+// ===== Auto slide =====
+setInterval(() => {
+    changeSlide(1);
+}, 3000);
