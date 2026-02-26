@@ -155,10 +155,52 @@
             </div>
             <div class="about-content">
                 <div class="about-images">
-                    <div class="about-image-main">
-                        <img src="image/a07.jpg" alt="Nhà hàng Hoàng Cung">
+                    <div class="carousel-container">
+                        <div class="carousel-slide">
+                            <img src="image/pc01.jpg" alt="Nhà hàng Hoàng Cung - Ảnh 1">
+                        </div>
+                        <div class="carousel-slide active">
+                            <img src="image/pc02.jpg" alt="Nhà hàng Hoàng Cung - Ảnh 2">
+                        </div>
+                        <div class="carousel-slide">
+                            <img src="image/pc03.jpg" alt="Nhà hàng Hoàng Cung - Ảnh 3">
+                        </div>
+                        <div class="carousel-slide">
+                            <img src="image/pc04.jpg" alt="Nhà hàng Hoàng Cung - Ảnh 4">
+                        </div>
+                        
+                        <!-- Navigation Buttons -->
+                        <button class="carousel-button prev" onclick="changeSlide(-1)">
+                            <i class="fas fa-chevron-left"></i>
+                        </button>
+                        <button class="carousel-button next" onclick="changeSlide(1)">
+                            <i class="fas fa-chevron-right"></i>
+                        </button>
+                        
+                        <!-- Dots Navigation -->
+                        <div class="carousel-dots">
+                            <span class="dot active" onclick="currentSlide(1)"></span>
+                            <span class="dot" onclick="currentSlide(2)"></span>
+                            <span class="dot" onclick="currentSlide(3)"></span>
+                            <span class="dot" onclick="currentSlide(4)"></span>
+                        </div>
+                        
+                        <!-- Proof Thumbnails -->
+                        <div class="carousel-proof">
+                            <div class="proof-image proof-1" onclick="currentSlide(1)" title="Ảnh 1">
+                                <img src="image/pc01.jpg" alt="Proof 1">
+                            </div>
+                            <div class="proof-image proof-2" onclick="currentSlide(2)" title="Ảnh 2">
+                                <img src="image/pc02.jpg" alt="Proof 2">
+                            </div>
+                            <div class="proof-image proof-3" onclick="currentSlide(3)" title="Ảnh 3">
+                                <img src="image/pc03.jpg" alt="Proof 3">
+                            </div>
+                            <div class="proof-image proof-4" onclick="currentSlide(4)" title="Ảnh 4">
+                                <img src="image/pc04.jpg" alt="Proof 4">
+                            </div>
+                        </div>
                     </div>
-                   
                 </div>
                 <div class="about-text">
                     <h3>KIẾN TRÚC HUẾ </h3>

@@ -230,3 +230,36 @@ window.addEventListener('load', () => {
 console.log('%cNhà hàng Hoàng Cung', 'color: #c8a97e; font-size: 24px; font-weight: bold;');
 console.log('%cKiến trúc Huế độc đáo tại Osaka Village Đà Lạt', 'color: #8b4513; font-size: 14px;');
 console.log('%cHotline: 0366 650 897', 'color: #333; font-size: 12px;');
+
+// ===== Carousel Functions =====
+let currentSlideIndex = 1;
+
+function changeSlide(n) {
+    showSlide(currentSlideIndex += n);
+}
+
+function currentSlide(n) {
+    showSlide(currentSlideIndex = n);
+}
+
+function showSlide(n) {
+    const slides = document.querySelectorAll('.carousel-slide');
+    const dots = document.querySelectorAll('.dot');
+    
+    if (n > slides.length) {
+        currentSlideIndex = 1;
+    }
+    if (n < 1) {
+        currentSlideIndex = slides.length;
+    }
+    
+    slides.forEach(slide => slide.classList.remove('active'));
+    dots.forEach(dot => dot.classList.remove('active'));
+    
+    if (slides[currentSlideIndex - 1]) {
+        slides[currentSlideIndex - 1].classList.add('active');
+    }
+    if (dots[currentSlideIndex - 1]) {
+        dots[currentSlideIndex - 1].classList.add('active');
+    }
+}
