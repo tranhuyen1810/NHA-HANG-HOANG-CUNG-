@@ -154,6 +154,14 @@ NHA HANG HOANG CUNG/
 - Smooth scroll navigation
 - Back to top button
 
+### ✅ CMS quản lý hình ảnh cho nhân viên
+- Truy cập: `/admin`
+- Đăng nhập: `admin / hoang-cung-2026`
+- Vào **Quản lý Hình ảnh**
+- Tìm ảnh cần đổi
+- Bấm **Thay thế** → chọn ảnh mới → bấm **Upload**
+- Ảnh website cập nhật ngay (cache-busting + live refresh)
+
 ---
 
 ## 🔧 Tùy chỉnh

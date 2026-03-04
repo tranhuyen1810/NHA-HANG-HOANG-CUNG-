@@ -268,3 +268,89 @@ function showSlide(n) {
 setInterval(() => {
     changeSlide(1);
 }, 3000);
+
+// ===== CMS Live Image Refresh =====
+function encodePathForUrl(filePath) {
+    return filePath
+        .split('/')
+        .map((segment) => encodeURIComponent(segment))
+        .join('/');
+}
+
+function normalizeRelativePath(src) {
+    if (!src) {
+        return '';
+    }
+
+    try {
+        const srcUrl = new URL(src, window.location.origin);
+        return decodeURIComponent(srcUrl.pathname.replace(/^\//, '')).toLowerCase();
+    } catch (error) {
+        return decodeURIComponent(src.split('?')[0].replace(/^\//, '')).toLowerCase();
+    }
+}
+
+function applyImageVersion(relativePath, version) {
+    const target = normalizeRelativePath(relativePath);
+    if (!target || !version) {
+        return;
+    }
+
+    document.querySelectorAll('img').forEach((img) => {
+        const srcAttr = img.getAttribute('src') || '';
+        const normalized = normalizeRelativePath(srcAttr);
+        if (normalized === target) {
+            const encodedPath = encodePathForUrl(relativePath);
+            img.src = `${encodedPath}?v=${version}`;
+        }
+    });
+}
+
+function applyAllVersions(versions) {
+    if (!versions || typeof versions !== 'object') {
+        return;
+    }
+
+    Object.entries(versions).forEach(([relativePath, version]) => {
+        applyImageVersion(relativePath, version);
+    });
+}
+
+async function loadImageVersions() {
+    try {
+        const response = await fetch('/api/image-versions');
+        if (!response.ok) {
+            return;
+        }
+        const data = await response.json();
+        applyAllVersions(data.versions);
+    } catch (error) {
+        // Ignore when website is running as static-only without CMS server.
+    }
+}
+
+function initCmsLiveRefresh() {
+    loadImageVersions();
+
+    if (!window.EventSource) {
+        return;
+    }
+
+    try {
+        const eventSource = new EventSource('/api/image-events');
+        eventSource.onmessage = (event) => {
+            try {
+                const payload = JSON.parse(event.data || '{}');
+                if (payload.type === 'image-updated') {
+                    applyImageVersion(payload.path, payload.version);
+                }
+            } catch (error) {
+                // Ignore malformed event payload.
+            }
+        };
+    } catch (error) {
+        // Ignore EventSource errors and keep website usable.
+    }
+}
+
+initCmsLiveRefresh();

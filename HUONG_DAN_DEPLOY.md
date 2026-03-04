@@ -1,155 +1,92 @@
-# 🚀 HƯỚNG DẪN DEPLOY WEBSITE LÊN INTERNET
+# 🚀 HƯỚNG DẪN DEPLOY CMS (ADMIN DÙNG ĐƯỢC THẬT)
 
-## ⚠️ VẤN ĐỀ HIỆN TẠI:
-Website của bạn **CHỈ TỒN TẠI TRÊN GITHUB** chứ chưa được deploy lên internet.
-Google không thể tìm thấy vì website chưa "live" trên domain hoangcung-dalat.vn
+## ✅ Kết luận nhanh
+- `lamdongcoop.vn` hiện đang chạy trên GitHub Pages (hosting tĩnh).
+- Hosting tĩnh **không chạy được** API `/api/login`, upload ảnh, SSE.
+- Vì vậy muốn vào admin (`/admin`) và thay ảnh realtime thì phải deploy backend Node.js.
 
 ---
 
-## 📋 GIẢI PHÁP: 3 CÁCH DEPLOY WEBSITE
+## 🎯 Mục tiêu
+1. Khách truy cập đúng domain chính `https://lamdongcoop.vn/`
+2. Nhân viên truy cập admin tại `https://lamdongcoop.vn/admin`
+3. Đăng nhập: `admin / hoang-cung-2026`
+4. Thay ảnh và website cập nhật ngay
 
-### ✅ CÁCH 1: GITHUB PAGES (MIỄN PHÍ - ĐỀ XUẤT)
+---
 
-**Bước 1: Enable GitHub Pages**
-1. Vào repository: https://github.com/tranhuyen1810/NHA-HANG-HOANG-CUNG-
-2. Click **Settings** (góc phải trên)
-3. Bên trái chọn **Pages**
-4. Ở phần **Source**:
-   - Branch: chọn `main`
-   - Folder: chọn `/ (root)`
-   - Click **Save**
+## 🛠 Phương án đề xuất: Render (nhanh nhất)
 
-**Bước 2: Chờ deploy (2-5 phút)**
-Website sẽ có địa chỉ tạm:
+Repository đã có sẵn file `render.yaml` để deploy tự động.
+
+### Bước 1: Đẩy code mới lên GitHub
+
+```bash
+git add .
+git commit -m "Add CMS admin + Render deployment config"
+git push origin main
 ```
-https://tranhuyen1810.github.io/NHA-HANG-HOANG-CUNG-/
+
+### Bước 2: Tạo service trên Render
+1. Vào https://dashboard.render.com
+2. Chọn **New +** → **Blueprint**
+3. Chọn repository: `tranhuyen1810/NHA-HANG-HOANG-CUNG-`
+4. Render sẽ tự đọc file `render.yaml` và tạo web service
+5. Chờ deploy xong (trạng thái **Live**)
+
+### Bước 3: Kiểm tra URL Render
+- Mở URL Render cấp (ví dụ `https://xxx.onrender.com/admin`)
+- Đăng nhập thử:
+  - Tài khoản: `admin`
+  - Mật khẩu: `hoang-cung-2026`
+
+> Lưu ý: Trong `render.yaml`, biến `ENFORCE_CANONICAL_REDIRECT` đang để `false` để test trên domain Render trước.
+
+### Bước 4: Gắn domain `lamdongcoop.vn`
+1. Vào service trên Render → **Settings** → **Custom Domains**
+2. Add:
+   - `lamdongcoop.vn`
+   - `www.lamdongcoop.vn`
+3. Render cung cấp bản ghi DNS, thêm tại nhà cung cấp domain
+4. Chờ DNS propagate
+
+### Bước 5: Bật ép domain chuẩn
+Sau khi domain chạy ổn, vào Render → **Environment**:
+- đổi `ENFORCE_CANONICAL_REDIRECT=false` thành `true`
+- Redeploy service
+
+Kết quả: mọi URL phụ sẽ 301 về `https://lamdongcoop.vn/`
+
+---
+
+## 📁 Biến môi trường đang dùng
+- `CANONICAL_HOST=lamdongcoop.vn`
+- `ENFORCE_CANONICAL_REDIRECT=false` (đổi `true` sau khi gắn domain)
+- `ADMIN_USERNAME=admin`
+- `ADMIN_PASSWORD=hoang-cung-2026`
+- `IMAGE_DIR=/var/data/image`
+
+---
+
+## 🧪 Checklist kiểm tra sau deploy
+
+```bash
+curl -I https://lamdongcoop.vn/
+curl -I https://lamdongcoop.vn/admin
+curl -i -X POST https://lamdongcoop.vn/api/login \
+  -H 'Content-Type: application/json' \
+  -d '{"username":"admin","password":"hoang-cung-2026"}'
 ```
 
-**Bước 3: Kết nối domain hoangcung-dalat.vn**
-1. Vào nhà cung cấp domain (nơi mua domain hoangcung-dalat.vn)
-2. Thêm DNS records:
-   ```
-   Type: A
-   Name: @
-   Value: 185.199.108.153
-   
-   Type: A  
-   Name: @
-   Value: 185.199.109.153
-   
-   Type: A
-   Name: @
-   Value: 185.199.110.153
-   
-   Type: A
-   Name: @
-   Value: 185.199.111.153
-   
-   Type: CNAME
-   Name: www
-   Value: tranhuyen1810.github.io
-   ```
-
-3. Quay lại GitHub Pages settings
-4. Ở phần **Custom domain**, nhập: `hoangcung-dalat.vn`
-5. Click **Save**
-6. Chờ DNS propagate (có thể mất 24-48 giờ)
+Kỳ vọng:
+- `/admin` trả `200`
+- `/api/login` trả `200` và có `token`
 
 ---
 
-### 💰 CÁCH 2: HOSTING VIỆT NAM (TRẢ PHÍ)
-
-**Các nhà cung cấp phổ biến:**
-- **MATBAO** (matbao.net) - 15,000đ/tháng
-- **AZDIGI** (azdigi.com) - 20,000đ/tháng  
-- **INET** (inet.vn) - 25,000đ/tháng
-
-**Các bước:**
-1. Mua hosting + domain (nếu chưa có)
-2. Upload files qua FTP/cPanel:
-   - index.html
-   - style.css
-   - script.js
-   - robots.txt
-   - sitemap.xml
-   - Các thư mục images/
-3. Trỏ domain về hosting
-4. Website sẽ live ngay sau vài phút
-
----
-
-### ☁️ CÁCH 3: NETLIFY/VERCEL (MIỄN PHÍ)
-
-**NETLIFY:**
-1. Vào https://netlify.com
-2. Đăng ký tài khoản (dùng GitHub)
-3. Click "Add new site" → "Import from Git"
-4. Chọn repository: NHA-HANG-HOANG-CUNG-
-5. Deploy settings để mặc định
-6. Click "Deploy"
-7. Website sẽ có domain: `something.netlify.app`
-8. Vào Site settings → Domain management → Add custom domain
-9. Nhập: `hoangcung-dalat.vn`
-10. Cấu hình DNS theo hướng dẫn
-
-**VERCEL:** (Tương tự Netlify)
-- https://vercel.com
-
----
-
-## 🎯 ĐỀ XUẤT CỦA TÔI:
-
-### Nếu bạn ĐÃ MUA domain hoangcung-dalat.vn:
-→ Dùng **GitHub Pages** (miễn phí) + kết nối domain
-
-### Nếu bạn CHƯA MUA domain:
-→ **Option A:** Deploy GitHub Pages trước, dùng link tạm
-→ **Option B:** Mua hosting + domain combo (khoảng 200k/năm)
-
----
-
-## 📝 SAU KHI WEBSITE ĐÃ LIVE:
-
-1. **Kiểm tra website hoạt động:**
-   - Mở trình duyệt ẩn danh
-   - Truy cập domain của bạn
-   - Đảm bảo website hiển thị đúng
-
-2. **Đăng ký Google Search Console:**
-   - https://search.google.com/search-console
-   - Thêm domain đã live
-   - Xác thực quyền sở hữu
-   - Submit sitemap
-
-3. **Google sẽ index trong 1-4 tuần**
-
----
-
-## ❓ CÂU HỎI THƯỜNG GẶP:
-
-**Q: Tôi có domain hoangcung-dalat.vn chưa?**
-A: Cần kiểm tra với người quản lý domain hoặc IT của công ty
-
-**Q: Tôi không biết mua domain ở đâu?**  
-A: Kiểm tra email/hóa đơn khi mua, hoặc dùng công cụ whois:
-   https://lookup.icann.org/en/lookup → nhập hoangcung-dalat.vn
-
-**Q: Tốn bao nhiêu tiền?**
-A: 
-- GitHub Pages: MIỄN PHÍ (chỉ trả tiền domain ~200k/năm)
-- Hosting Việt Nam: 150k-300k/năm
-- Netlify/Vercel: MIỄN PHÍ (trả tiền domain nếu cần)
-
-**Q: Mất bao lâu để hiển thị trên Google?**
-A: 1-4 tuần sau khi website live + đăng ký Search Console
-
----
-
-## 🆘 CẦN TRỢ GIÚP?
-
-Nếu cần, hãy:
-1. Cho tôi biết bạn đã mua domain hoangcung-dalat.vn chưa?
-2. Mua ở nhà cung cấp nào?
-3. Có ngân sách cho hosting không?
-
-Tôi sẽ hướng dẫn chi tiết từng bước! 🎉
+## 👩‍💼 Luồng sử dụng cho nhân viên
+1. Mở `https://lamdongcoop.vn/admin`
+2. Đăng nhập `admin / hoang-cung-2026`
+3. Vào **Quản lý Hình ảnh**
+4. Bấm **Thay thế** → chọn ảnh mới → bấm **Upload**
+5. Ảnh website cập nhật ngay

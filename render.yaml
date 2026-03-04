@@ -1,0 +1,26 @@
+services:
+  - type: web
+    name: nha-hang-hoang-cung-cms
+    env: node
+    plan: starter
+    buildCommand: npm install
+    startCommand: npm start
+    healthCheckPath: /healthz
+    autoDeploy: true
+    envVars:
+      - key: NODE_VERSION
+        value: 20
+      - key: CANONICAL_HOST
+        value: lamdongcoop.vn
+      - key: ENFORCE_CANONICAL_REDIRECT
+        value: "false"
+      - key: ADMIN_USERNAME
+        value: admin
+      - key: ADMIN_PASSWORD
+        value: hoang-cung-2026
+      - key: IMAGE_DIR
+        value: /var/data/image
+    disk:
+      name: cms-image-storage
+      mountPath: /var/data
+      sizeGB: 1
