@@ -13,7 +13,7 @@ services:
       - key: CANONICAL_HOST
         value: lamdongcoop.vn
       - key: ENFORCE_CANONICAL_REDIRECT
-        value: "false"
+        value: "true"
       - key: ADMIN_USERNAME
         value: admin
       - key: ADMIN_PASSWORD

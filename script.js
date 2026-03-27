@@ -127,6 +127,84 @@ function closeImagePopup() {
     }
 }
 
+// ===== Real-time Image Refresh From CMS =====
+function normalizeImagePath(rawSrc) {
+    try {
+        const url = new URL(rawSrc, window.location.origin);
+        const path = url.pathname.replace(/^\/+/, '');
+        if (!path.toLowerCase().startsWith('image/')) {
+            return '';
+        }
+        return path;
+    } catch (error) {
+        return '';
+    }
+}
+
+function setImageVersion(img, version) {
+    if (!img || !version) {
+        return;
+    }
+
+    const url = new URL(img.src, window.location.origin);
+    url.searchParams.set('v', String(version));
+    img.src = url.toString();
+}
+
+function updateImagesByPath(relativePath, version) {
+    const targetPath = (relativePath || '').replace(/^\/+/, '').toLowerCase();
+    if (!targetPath) {
+        return;
+    }
+
+    document.querySelectorAll('img').forEach((img) => {
+        const currentPath = normalizeImagePath(img.getAttribute('src') || img.src).toLowerCase();
+        if (currentPath === targetPath) {
+            setImageVersion(img, version || Date.now());
+        }
+    });
+}
+
+async function syncImageVersionsFromServer() {
+    try {
+        const response = await fetch('/api/image-versions', { cache: 'no-store' });
+        if (!response.ok) {
+            return;
+        }
+
+        const data = await response.json();
+        const versions = data?.versions || {};
+        Object.entries(versions).forEach(([relativePath, version]) => {
+            updateImagesByPath(relativePath, version);
+        });
+    } catch (error) {
+        // Ignore network failures; live updates still attempt reconnect via SSE.
+    }
+}
+
+function subscribeImageEvents() {
+    if (typeof EventSource === 'undefined') {
+        return;
+    }
+
+    const stream = new EventSource('/api/image-events');
+    stream.onmessage = (event) => {
+        try {
+            const payload = JSON.parse(event.data || '{}');
+            if (payload.type !== 'image-updated') {
+                return;
+            }
+            updateImagesByPath(payload.path, payload.version || Date.now());
+        } catch (error) {
+            // Skip malformed event payloads.
+        }
+    };
+
+    stream.onerror = () => {
+        // EventSource auto reconnects by default.
+    };
+}
+
 // Add ESC key to close popup
 document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') {
@@ -161,6 +239,9 @@ document.addEventListener('DOMContentLoaded', () => {
         el.style.transition = 'all 0.6s ease';
         observer.observe(el);
     });
+
+    syncImageVersionsFromServer();
+    subscribeImageEvents();
 });
 
 // ===== Form Validation (if you add a booking form later) =====
