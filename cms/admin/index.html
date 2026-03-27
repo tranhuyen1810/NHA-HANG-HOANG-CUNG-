@@ -54,24 +54,142 @@
     <main id="cmsSection" class="container hidden">
         <section class="card">
             <div class="topbar">
-                <h2>Quản lý Hình ảnh</h2>
+                <h2>CMS Nhà Hàng Hoàng Cung</h2>
                 <button id="logoutBtn" class="secondary">Đăng xuất</button>
             </div>
 
-            <ol class="workflow-list">
-                <li>Đăng nhập bằng tài khoản admin.</li>
-                <li>Vào mục <b>Quản lý Hình ảnh</b>.</li>
-                <li>Tìm ảnh cần thay đổi.</li>
-                <li>Bấm <b>Thay thế</b> → chọn ảnh mới → bấm <b>Upload</b>.</li>
-                <li>Ảnh trên website cập nhật ngay lập tức.</li>
-            </ol>
-
-            <div class="search-box">
-                <input type="text" id="searchInput" placeholder="Tìm ảnh theo tên...">
+            <!-- Tab navigation -->
+            <div class="cms-tabs">
+                <button class="tab-btn active" data-tab="images">🖼️ Quản lý Hình ảnh</button>
+                <button class="tab-btn" data-tab="content">📝 Quản lý Nội dung</button>
             </div>
 
-            <div id="imageList" class="image-list"></div>
-            <p id="cmsMessage" class="message"></p>
+            <!-- Tab: Hình ảnh -->
+            <div id="tab-images" class="tab-panel">
+                <ol class="workflow-list">
+                    <li>Đăng nhập bằng tài khoản admin.</li>
+                    <li>Vào mục <b>Quản lý Hình ảnh</b>.</li>
+                    <li>Tìm ảnh cần thay đổi.</li>
+                    <li>Bấm <b>Thay thế</b> → chọn ảnh mới → bấm <b>Upload</b>.</li>
+                    <li>Ảnh trên website cập nhật ngay lập tức.</li>
+                </ol>
+
+                <div class="search-box">
+                    <input type="text" id="searchInput" placeholder="Tìm ảnh theo tên...">
+                </div>
+
+                <div id="imageList" class="image-list"></div>
+                <p id="cmsMessage" class="message"></p>
+            </div>
+
+            <!-- Tab: Nội dung -->
+            <div id="tab-content" class="tab-panel hidden">
+                <div class="content-tab-header">
+                    <p class="content-hint">Chỉnh sửa nội dung hiển thị trên website. Nhấn <b>Lưu</b> để cập nhật từng mục.</p>
+                    <button id="saveAllBtn" class="btn-save-all">💾 Lưu tất cả</button>
+                </div>
+
+                <!-- Block: Chả Cá Lã Vọng -->
+                <div class="content-block">
+                    <div class="content-block-head">
+                        <span class="block-icon">🐟</span>
+                        <div class="block-meta">
+                            <span class="block-title">Tinh hoa Chả Cá Lã Vọng</span>
+                            <span class="block-badge">Món đặc sản</span>
+                        </div>
+                        <div class="block-actions">
+                            <button class="btn-preview-block" data-block="chaca">👁 Xem trước</button>
+                            <button class="btn-save-block" data-block="chaca">💾 Lưu</button>
+                        </div>
+                    </div>
+                    <div class="content-block-body">
+                        <div class="field-row">
+                            <label>Tiêu đề chính</label>
+                            <input type="text" id="chaca-title" class="content-input"
+                                value="TINH HOA CHẢ CÁ LÁ VỌNG CHUẨN VỊ TRỨ DANH">
+                        </div>
+                        <div class="field-row">
+                            <label>Mô tả món ăn</label>
+                            <textarea id="chaca-desc" class="content-textarea" rows="4">Thưởng thức Chả Cá Lã Vọng với cá tầm/cá lăng nướng vàng thơm, ăn kèm bún tươi, đậu phộng rang, hành lá, thì là và mắm tôm đậm đà. Từng miếng cá mềm ngọt hòa quyện cùng rau thơm tươi xanh tạo nên trải nghiệm ẩm thực chuẩn vị Hà thành. Chỉ 129.000 VNĐ/phần, lựa chọn lý tưởng cho bữa ăn chất lượng bên gia đình và bạn bè.</textarea>
+                        </div>
+                        <div class="field-row">
+                            <label>Giá bán</label>
+                            <input type="text" id="chaca-price" class="content-input" value="129.000 VNĐ/phần">
+                        </div>
+                        <div class="field-row">
+                            <label>Nguyên liệu (mỗi dòng một nguyên liệu)</label>
+                            <textarea id="chaca-ingredients" class="content-textarea" rows="4">Cá tầm / Cá lăng nướng vàng
+Bún tươi
+Đậu phộng rang
+Hành lá & thì là
+Mắm tôm đậm đà</textarea>
+                        </div>
+                    </div>
+                    <div id="chaca-preview" class="content-preview hidden"></div>
+                </div>
+
+                <!-- Block: Đội ngũ -->
+                <div class="content-block">
+                    <div class="content-block-head">
+                        <span class="block-icon">👨‍🍳</span>
+                        <div class="block-meta">
+                            <span class="block-title">Giới thiệu Đội ngũ</span>
+                            <span class="block-badge">Về chúng tôi</span>
+                        </div>
+                        <div class="block-actions">
+                            <button class="btn-preview-block" data-block="team">👁 Xem trước</button>
+                            <button class="btn-save-block" data-block="team">💾 Lưu</button>
+                        </div>
+                    </div>
+                    <div class="content-block-body">
+                        <div class="field-row">
+                            <label>Nội dung giới thiệu</label>
+                            <textarea id="team-desc" class="content-textarea" rows="3">Với đội ngũ đầu bếp chuyên nghiệp, chúng tôi tự hào phục vụ những món ăn tinh túy của ẩm thực cung đình Huế, mang đến trải nghiệm ẩm thực đẳng cấp cho thực khách sành ăn.</textarea>
+                        </div>
+                    </div>
+                    <div id="team-preview" class="content-preview hidden"></div>
+                </div>
+
+                <!-- Block: Mẹt Cơm Nhà -->
+                <div class="content-block">
+                    <div class="content-block-head">
+                        <span class="block-icon">🍚</span>
+                        <div class="block-meta">
+                            <span class="block-title">Mẹt Cơm Nhà Ấm Vị Yêu Thương</span>
+                            <span class="block-badge">Món đặc sản</span>
+                        </div>
+                        <div class="block-actions">
+                            <button class="btn-preview-block" data-block="metcom">👁 Xem trước</button>
+                            <button class="btn-save-block" data-block="metcom">💾 Lưu</button>
+                        </div>
+                    </div>
+                    <div class="content-block-body">
+                        <div class="field-row">
+                            <label>Tiêu đề chính</label>
+                            <input type="text" id="metcom-title" class="content-input"
+                                value="MẸT CƠM NHÀ ẤM VỊ YÊU THƯƠNG">
+                        </div>
+                        <div class="field-row">
+                            <label>Mô tả món ăn</label>
+                            <textarea id="metcom-desc" class="content-textarea" rows="4">"Mẹt Cơm Nhà" mang đến cảm giác thân quen với cơm niêu nóng hổi, món mặn đậm đà, canh thanh mát và rau xanh thay đổi theo ngày. Chỉ 99.000 VNĐ/phần, bạn đã có một bữa cơm tròn vị như tại nhà, đủ đầy dinh dưỡng và chan chứa yêu thương cho những phút giây sum vầy.</textarea>
+                        </div>
+                        <div class="field-row">
+                            <label>Giá bán</label>
+                            <input type="text" id="metcom-price" class="content-input" value="99.000 VNĐ/phần">
+                        </div>
+                        <div class="field-row">
+                            <label>Thành phần bữa cơm (mỗi dòng một món)</label>
+                            <textarea id="metcom-ingredients" class="content-textarea" rows="4">Cơm niêu nóng hổi
+Món mặn đậm đà
+Canh thanh mát
+Rau xanh thay đổi theo ngày</textarea>
+                        </div>
+                    </div>
+                    <div id="metcom-preview" class="content-preview hidden"></div>
+                </div>
+
+                <p id="contentMessage" class="message"></p>
+            </div>
         </section>
     </main>
 

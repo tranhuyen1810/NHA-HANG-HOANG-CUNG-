@@ -241,3 +241,150 @@ async function bootstrap() {
 }
 
 bootstrap();
+
+// ===== TAB NAVIGATION =====
+document.querySelectorAll('.tab-btn').forEach((btn) => {
+    btn.addEventListener('click', function () {
+        document.querySelectorAll('.tab-btn').forEach((b) => b.classList.remove('active'));
+        document.querySelectorAll('.tab-panel').forEach((p) => p.classList.add('hidden'));
+        this.classList.add('active');
+
+        const target = document.getElementById(`tab-${this.dataset.tab}`);
+        if (target) {
+            target.classList.remove('hidden');
+        }
+    });
+});
+
+// ===== CONTENT MANAGEMENT =====
+const CONTENT_BLOCKS = {
+    chaca: {
+        fields: ['title', 'desc', 'price', 'ingredients']
+    },
+    team: {
+        fields: ['desc']
+    },
+    metcom: {
+        fields: ['title', 'desc', 'price', 'ingredients']
+    }
+};
+
+function loadContentFromStorage() {
+    Object.entries(CONTENT_BLOCKS).forEach(([block, config]) => {
+        config.fields.forEach((field) => {
+            const saved = localStorage.getItem(`content_${block}_${field}`);
+            const el = document.getElementById(`${block}-${field}`);
+            if (saved !== null && el) {
+                el.value = saved;
+            }
+        });
+    });
+}
+
+function getBlockLabel(block) {
+    const labels = {
+        chaca: 'Chả Cá Lã Vọng',
+        team: 'Đội ngũ đầu bếp',
+        metcom: 'Mẹt Cơm Nhà'
+    };
+    return labels[block] || block;
+}
+
+function showContentMessage(text, type) {
+    const el = document.getElementById('contentMessage');
+    if (!el) {
+        return;
+    }
+
+    el.textContent = text;
+    el.className = `message ${type}`;
+    clearTimeout(el._timer);
+    el._timer = setTimeout(() => {
+        el.textContent = '';
+        el.className = 'message';
+    }, 4000);
+}
+
+function saveBlock(block) {
+    const config = CONTENT_BLOCKS[block];
+    if (!config) {
+        return;
+    }
+
+    config.fields.forEach((field) => {
+        const el = document.getElementById(`${block}-${field}`);
+        if (el) {
+            localStorage.setItem(`content_${block}_${field}`, el.value);
+        }
+    });
+
+    showContentMessage(`Đã lưu "${getBlockLabel(block)}" thành công.`, 'success');
+}
+
+function buildPreviewHTML(block) {
+    const getValue = (id) => {
+        const el = document.getElementById(id);
+        return el ? el.value.trim() : '';
+    };
+
+    if (block === 'team') {
+        const desc = getValue('team-desc');
+        return `
+            <div class="preview-label">Xem trước nội dung</div>
+            <div class="preview-desc">${desc}</div>
+        `;
+    }
+
+    const title = getValue(`${block}-title`);
+    const desc = getValue(`${block}-desc`);
+    const price = getValue(`${block}-price`);
+    const ingredients = getValue(`${block}-ingredients`);
+    const tags = ingredients
+        .split('\n')
+        .filter((line) => line.trim())
+        .map((line) => `<span>${line.trim()}</span>`)
+        .join('');
+
+    return `
+        <div class="preview-label">Xem trước nội dung</div>
+        <div class="preview-title">${title}</div>
+        <div class="preview-desc">${desc}</div>
+        ${price ? `<div class="preview-price">${price}</div>` : ''}
+        ${tags ? `<div class="preview-tags">${tags}</div>` : ''}
+    `;
+}
+
+document.querySelectorAll('.btn-save-block').forEach((btn) => {
+    btn.addEventListener('click', function () {
+        saveBlock(this.dataset.block);
+    });
+});
+
+document.querySelectorAll('.btn-preview-block').forEach((btn) => {
+    btn.addEventListener('click', function () {
+        const block = this.dataset.block;
+        const previewEl = document.getElementById(`${block}-preview`);
+        if (!previewEl) {
+            return;
+        }
+
+        const isVisible = !previewEl.classList.contains('hidden');
+        if (isVisible) {
+            previewEl.classList.add('hidden');
+            return;
+        }
+
+        previewEl.innerHTML = buildPreviewHTML(block);
+        previewEl.classList.remove('hidden');
+    });
+});
+
+const saveAllBtn = document.getElementById('saveAllBtn');
+if (saveAllBtn) {
+    saveAllBtn.addEventListener('click', () => {
+        Object.keys(CONTENT_BLOCKS).forEach((block) => saveBlock(block));
+        showContentMessage('Đã lưu tất cả nội dung thành công.', 'success');
+    });
+}
+
+loadContentFromStorage();
