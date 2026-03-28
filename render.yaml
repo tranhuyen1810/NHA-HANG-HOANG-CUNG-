@@ -11,7 +11,7 @@ services:
       - key: NODE_VERSION
         value: 20
       - key: CANONICAL_HOST
-        value: lamdongcoop.vn
+        value: www.lamdongcoop.vn
       - key: ENFORCE_CANONICAL_REDIRECT
         value: "true"
       - key: ADMIN_USERNAME
